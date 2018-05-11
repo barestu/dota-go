@@ -8,8 +8,8 @@ import store from './src/store';
 
 import HeroesScreen from './src/scenes/Heroes';
 import AboutScreen from './src/scenes/About';
+import MatchesScreen from './src/scenes/Matches';
 import HeroDetailsScreen from './src/scenes/Heroes/components/HeroDetails';
-import FormModal from './src/components/FormModal';
 
 const HeroesStack = createStackNavigator({
   Heroes: {
@@ -34,25 +34,76 @@ const HeroesStack = createStackNavigator({
   }
 })
 
+const MatchesStack = createStackNavigator({
+  Matches: {
+    screen: MatchesScreen,
+    navigationOptions: {
+      title: 'Pub Matches'
+    }
+  }
+},{
+  initialRouteName: 'Matches',
+  navigationOptions: {
+    headerStyle: {
+      backgroundColor: '#263238'
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: '100'
+    }
+  }
+})
+
+const AboutStack = createStackNavigator({
+  About: {
+    screen: AboutScreen,
+    navigationOptions: {
+      title: 'About'
+    }
+  }
+},{
+  initialRouteName: 'About',
+  navigationOptions: {
+    headerStyle: {
+      backgroundColor: '#263238'
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: '100'
+    }
+  }
+})
+
 const TabNavStack = createBottomTabNavigator({
   Heroes: HeroesStack,
-  About: AboutScreen
+  Matches: MatchesStack,
+  About: AboutStack
 },{
   navigationOptions: ({ navigation }) => ({
     tabBarIcon: ({ focused, tintColor }) => {
       const { routeName } = navigation.state
+      let iconName
 
-      return <Ionicons name="ios-list-box-outline" size={25} color={tintColor} />
+      if (routeName === 'Heroes') {
+        iconName = 'ios-game-controller-b'
+      } else if (routeName === 'Matches') {
+        iconName = 'ios-list-box-outline'
+      } else if (routeName === 'About') {
+        iconName = 'ios-information-circle'
+      }
+
+      return <Ionicons name={iconName} size={25} color={tintColor} />
     }
-  })
+  }),
+  tabBarOptions: {
+    activeTintColor: '#e53935',
+    inactiveTintColor: '#546E7A',
+  },
 })
 
 const RootStack = createStackNavigator({
   Main: {
     screen: TabNavStack
-  },
-  FormModal: {
-    screen: FormModal
   }
 },{
   mode: 'modal',

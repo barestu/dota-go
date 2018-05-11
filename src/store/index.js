@@ -3,9 +3,11 @@ import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 
 import heroesReducers from './heroes/reducers';
+import matchesReducers from './matches/reducers';
 
 const reducers = combineReducers({
-  heroes: heroesReducers
+  heroes: heroesReducers,
+  matches: matchesReducers
 })
 
 const store = createStore(

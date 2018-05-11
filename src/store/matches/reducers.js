@@ -1,7 +1,7 @@
 import {
-  FETCH_HEROES_LOADING,
-  FETCH_HEROES_FAILED,
-  FETCH_HEROES_DONE
+  FETCH_MATCHES_LOADING,
+  FETCH_MATCHES_FAILED,
+  FETCH_MATCHES_DONE
 } from './action.types';
 
 const initialState = {
@@ -13,14 +13,14 @@ const initialState = {
   }
 }
 
-const heroesReducers = (state = {...initialState}, action) => {
+const matchesReducers = (state = {...initialState}, action) => {
   switch (action.type) {
-    case FETCH_HEROES_LOADING:
+    case FETCH_MATCHES_LOADING:
       return {
         ...state,
         loading: true
       }
-    case FETCH_HEROES_FAILED:
+    case FETCH_MATCHES_FAILED:
       let errObj = { status: true, message: action.payload }
 
       return {
@@ -28,7 +28,7 @@ const heroesReducers = (state = {...initialState}, action) => {
         loading: false,
         error: errObj
       }
-    case FETCH_HEROES_DONE:
+    case FETCH_MATCHES_DONE:
       return {
         ...state,
         loading: false,
@@ -39,4 +39,4 @@ const heroesReducers = (state = {...initialState}, action) => {
   }
 }
 
-export default heroesReducers
+export default matchesReducers

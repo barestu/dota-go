@@ -1,17 +1,17 @@
 import axios from 'axios'
 import {
-  FETCH_HEROES_LOADING,
-  FETCH_HEROES_FAILED,
-  FETCH_HEROES_DONE
+  FETCH_MATCHES_LOADING,
+  FETCH_MATCHES_FAILED,
+  FETCH_MATCHES_DONE
 } from './action.types';
 
-export const fetchHeroes = () => {
+export const fetchMatches = () => {
   return dispatch => {
     dispatch(fetchDataLoading())
-    axios.get('https://api.opendota.com/api/heroStats')
+    axios.get('https://api.opendota.com/api/publicMatches')
       .then(({ data }) => {
         console.log(data)
-        dispatch(fetchHeroesDone(data))
+        dispatch(fetchMatchesDone(data))
       })
       .catch(err => {
         alert('Fetch data failed')
@@ -22,15 +22,15 @@ export const fetchHeroes = () => {
 }
 
 const fetchDataLoading = () => ({
-  type: FETCH_HEROES_LOADING
+  type: FETCH_MATCHES_LOADING
 })
 
 const fetchDataFailed = (err) => ({
-  type: FETCH_HEROES_FAILED,
+  type: FETCH_MATCHES_FAILED,
   payload: err.message
 })
 
-const fetchHeroesDone = (heroes) => ({
-  type: FETCH_HEROES_DONE,
+const fetchMatchesDone = (heroes) => ({
+  type: FETCH_MATCHES_DONE,
   payload: heroes
 })

@@ -1,25 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchHeroes } from '../../store/heroes/actions';
+import { fetchMatches } from '../../store/matches/actions';
 import {
   View,
   Text,
   StyleSheet,
-  FlatList,
-  TouchableHighlight
+  FlatList
 } from 'react-native';
 
-import HeroCard from './components/HeroCard';
+import MatchItem from './components/MatchItem';
 import Loading from '../../components/Loading';
 
-class Heroes extends Component {
+class Matches extends Component {
   componentDidMount() {
-    this.props.fetchHeroes()
+    this.props.fetchMatches()
   }
 
   render() {
-    const { data, loading, error } = this.props.heroes
+    const { data, loading, error } = this.props.matches
 
     return (
       <View style={styles.container}>
@@ -27,16 +26,9 @@ class Heroes extends Component {
           loading ? <Loading /> :
           error.status ? <Text>Oops, something wrong</Text> :
           <FlatList
-            numColumns={3}
             data={data}
-            keyExtractor={(item, index) => item.id}
-            renderItem={({item}) => 
-              <TouchableHighlight onPress={() => {
-                this.props.navigation.navigate('HeroDetails', {hero: item})
-              }}>
-                <HeroCard hero={item} />
-              </TouchableHighlight>
-            }
+            keyExtractor={(item, index) => item.match_id.toString()}
+            renderItem={({item}) => <MatchItem match={item} />}
           />
         }
       </View>
@@ -45,18 +37,17 @@ class Heroes extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  heroes: state.heroes
+  matches: state.matches
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  fetchHeroes
+  fetchMatches
 }, dispatch)
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#37474F',
-    alignItems: 'center',
     justifyContent: 'center'
   }
 });
@@ -64,4 +55,4 @@ const styles = StyleSheet.create({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Heroes);
+)(Matches);

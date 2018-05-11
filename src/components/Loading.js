@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import {
   View,
-  Text,
-  StyleSheet,
+  ActivityIndicator,
+  StyleSheet
 } from 'react-native';
 
-class About extends Component {
+class Loading extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={{fontSize: 24, color: '#fff'}}>About Page</Text>
-      </View >
+      <View styles={styles.container}>
+        <ActivityIndicator size="large" color="#e53935"/>
+      </View>
     );
   }
 }
@@ -21,7 +20,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#37474F',
     alignItems: 'center',
-  }
-});
+    justifyContent: 'center'
+  },
+})
 
-export default About
+export default Loading;

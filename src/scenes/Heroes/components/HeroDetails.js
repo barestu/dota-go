@@ -34,18 +34,44 @@ class HeroDetails extends Component {
             style={styles.heroImg}
             source={{uri: 'http://cdn.dota2.com/' + hero.img}}
           />
+
+          <Text style={styles.contentTitle}>Attributes</Text>
+          <View style={styles.content}>
+            <Text style={styles.textContent}>
+              <Image
+                source={require('./assets/40px-Strength_attribute_symbol.png')}
+                style={{ width: 30, height: 30 }}
+              />
+              {` ${hero.base_str}+${hero.str_gain}`}
+            </Text>
+            <Text style={styles.textContent}>
+              <Image
+                source={require('./assets/40px-Agility_attribute_symbol.png')}
+                style={{ width: 30, height: 30 }}
+              />
+              {` ${hero.base_agi}+${hero.agi_gain}`}
+            </Text>
+            <Text style={styles.textContent}>
+              <Image
+                source={require('./assets/40px-Intelligence_attribute_symbol.png')}
+                style={{ width: 30, height: 30 }}
+              />
+              {` ${hero.base_int}+${hero.int_gain}`}
+            </Text>
+          </View>
+
           <Text style={styles.contentTitle}>Primary Attributes</Text>
           <Text style={styles.textContent}>{hero.primary_attr.toUpperCase()}</Text>
 
           <Text style={styles.contentTitle}>Attack Type</Text>
-          <Text style={styles.textContent}>{hero.attack_type}}</Text>
+          <Text style={styles.textContent}>{hero.attack_type}</Text>
 
-          <Text style={styles.contentTitle}>Attributes</Text>
-          <View style={styles.content}>
-            <Text style={styles.textContent}>{`${hero.base_str}+${hero.str_gain}`}</Text>
-            <Text style={styles.textContent}>{`${hero.base_agi}+${hero.agi_gain}`}</Text>
-            <Text style={styles.textContent}>{`${hero.base_int}+${hero.int_gain}`}</Text>
-          </View>
+          <Text style={styles.contentTitle}>Base Stats</Text>
+          <Text style={styles.textContent}>Base Damage: {hero.base_attack_min+'-'+hero.base_attack_max}</Text>
+          <Text style={styles.textContent}>Movement Speed: {hero.move_speed}</Text>
+          <Text style={styles.textContent}>Attack Range: {hero.attack_range}</Text>
+          <Text style={styles.textContent}>Projectile Speed: {hero.projectile_speed}</Text>
+          <Text style={styles.textContent}>Turn Rate: {hero.turn_rate}</Text>
         </View>
       </ScrollView>
     );
